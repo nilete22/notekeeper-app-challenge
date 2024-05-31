@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { DeleteButton } from "./buttons";
 import { UpdateNoteForm } from "./";
 
@@ -39,4 +40,10 @@ export const Note = ({ note, handleDeleteNote, handleUpdateNote }) => {
       </div>
     </div>
   );
+};
+
+Note.propTypes = {
+  note: PropTypes.object.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
+  handleUpdateNote: PropTypes.func.isRequired,
 };

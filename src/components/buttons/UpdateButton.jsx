@@ -1,5 +1,7 @@
 import { UpdateNoteForm } from "../";
 
+import PropTypes from "prop-types";
+
 export const UpdateButton = ({ id, setNotes }) => {
   const buttonStyles = {
     padding: "8px 16px",
@@ -15,13 +17,15 @@ export const UpdateButton = ({ id, setNotes }) => {
 
   return (
     <div>
-      <button
-        onClick={handleUpdate}
-        style={buttonStyles}
-      >
+      <button onClick={handleUpdate} style={buttonStyles}>
         Update
       </button>
       <UpdateNoteForm id={id} setNotes={setNotes} />
     </div>
   );
+};
+
+UpdateButton.propTypes = {
+  id: PropTypes.string.isRequired,
+  setNotes: PropTypes.func.isRequired,
 };

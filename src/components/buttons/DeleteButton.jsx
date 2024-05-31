@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const DeleteButton = ({ id, handleDeleteNote }) => {
   const buttonStyles = {
     padding: "8px 16px",
@@ -20,3 +22,9 @@ export const DeleteButton = ({ id, handleDeleteNote }) => {
     </button>
   );
 };
+
+DeleteButton.propTypes = {
+  id: PropTypes.string.isRequired,
+  handleDeleteNote: PropTypes.func.isRequired,
+};
+

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import PropTypes from "prop-types";
+
 export const UpdateNoteForm = ({ note, handleUpdateNote }) => {
   const [formData, setFormData] = useState({
     name: note.name || "",
@@ -20,6 +22,18 @@ export const UpdateNoteForm = ({ note, handleUpdateNote }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateNote(note.id, formData);
+  };
+  
+  UpdateNoteForm.propTypes = {
+    note: PropTypes.shape({
+      name: PropTypes.string,
+      description: PropTypes.string,
+      important: PropTypes.bool,
+      status: PropTypes.string,
+      dueDate: PropTypes.string,
+      id: PropTypes.string,
+    }),
+    handleUpdateNote: PropTypes.func,
   };
 
   const formContainerStyles = {
@@ -89,4 +103,16 @@ export const UpdateNoteForm = ({ note, handleUpdateNote }) => {
       </form>
     </div>
   );
+};
+
+UpdateNoteForm.propTypes = {
+  note: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    important: PropTypes.bool,
+    status: PropTypes.string,
+    dueDate: PropTypes.string,
+    id: PropTypes.string,
+  }),
+  handleUpdateNote: PropTypes.func,
 };
