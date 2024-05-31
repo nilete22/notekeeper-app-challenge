@@ -1,55 +1,43 @@
-const baseurl = import.meta.env.VITE_BASE_URL;
-
-const URL_PATH = 'notes';
-
-const URL_FETCH = `${baseurl}/${URL_PATH}`;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const URL_PATH = "notes";
+const URL_FETCH_NOTES = `${BASE_URL}/${URL_PATH}`;
 
 const getNotes = () => {
-    return fetch(URL_FETCH)
-    .then(response => response.json())
-    .then((data)=>data.notes);
+  return fetch(URL_FETCH_NOTES, { 
+    method: "GET" }).then((response) => {
+    return response.json();
+  });
 };
 
 const createNote = (newNote) => {
-    return fetch(URL_FETCH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newNote)
-    }).then(response => response.json())
-    .catch(error => {
-        console.error('Error al crear la nota: ', error);
-    });
-}
-
-const updateNotes = (id, updatedNote) => {
-    const URL = `${URL_FETCH}/${id}`;
-    return fetch(URL, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedNote)
-    }).then(response => response.json())
-    .catch(error => {
-        console.error('Error al actualizar la nota: ', error);
-    });
-}
+  return fetch(URL_FETCH_NOTES, {
+    method: "POST",
+    body: JSON.stringify(newNote),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const deleteNotes = (id) => {
-    const URL = `${URL_FETCH}/${id}`;
-    return fetch(URL, {
-        method: 'DELETE'
-    }).then(response => response.json())
-    .catch(error => {
-        console.error('Error al eliminar la nota: ', error);
-    });
-}
-const notesServices = {
+  return fetch(`${URL_FETCH_NOTES}/${id}`, {
+    method: "DELETE",
+  });
+};
+
+const updateNotes = (id, updatedNote) => {
+  return fetch(`${URL_FETCH_NOTES}/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(updatedNote),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export default {
     getNotes,
     createNote,
+    deleteNotes,
     updateNotes,
-    deleteNotes
 };
-export default notesServices;
